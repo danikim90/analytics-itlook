@@ -1,5 +1,6 @@
 const CURVA_COLORS = {
-  A: '#16a34a',
+  'A+': '#15803d',
+  'A-': '#16a34a',
   'B+': '#2563eb',
   'B-': '#7c3aed',
   'C+': '#d97706',
@@ -47,7 +48,7 @@ export default function SummaryCards({ data }) {
       </div>
 
       <div className="curva-dist">
-        {['A', 'B+', 'B-', 'C+', 'C-'].map((c) => (
+        {['A+', 'A-', 'B+', 'B-', 'C+', 'C-'].map((c) => (
           <div key={c} className="curva-pill" style={{ borderColor: CURVA_COLORS[c] }}>
             <span className="curva-badge" style={{ background: CURVA_COLORS[c] }}>
               {c}

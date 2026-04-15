@@ -2,14 +2,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0f0f11;
-  --bg2: #18181c;
-  --bg3: #222228;
-  --border: #2e2e38;
-  --text: #f0f0f4;
-  --text2: #9898a8;
-  --rose: #e91e7a;
-  --rose-dim: rgba(233, 30, 122, 0.15);
+  --bg: #F0EEE6;
+  --bg2: #FFFFFF;
+  --bg3: #F5F3ED;
+  --border: #E5E3DC;
+  --text: #1A1A1A;
+  --text2: #888880;
+  --rose: #E91E8C;
+  --rose-dim: rgba(233, 30, 140, 0.10);
   --green: #16a34a;
   --blue: #2563eb;
   --purple: #7c3aed;
@@ -77,18 +77,18 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; }
 
 .btn-process {
   display: block; width: 100%; max-width: 320px; margin: 0 auto;
-  background: var(--rose); color: #fff;
+  background: #1A1A1A; color: #fff;
   border: none; border-radius: var(--radius);
   padding: 14px 24px; font-size: 15px; font-weight: 700;
   cursor: pointer; transition: opacity 0.2s;
 }
-.btn-process:hover:not(:disabled) { opacity: 0.85; }
-.btn-process:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-process:hover:not(:disabled) { opacity: 0.75; }
+.btn-process:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .error-banner {
   background: rgba(220,38,38,0.1);
   border: 1px solid var(--red);
-  color: #fca5a5;
+  color: #b91c1c;
   border-radius: var(--radius);
   padding: 12px 16px; margin-bottom: 20px;
   font-size: 13px;
@@ -255,3 +255,45 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; }
 }
 .pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
 .pagination button:hover:not(:disabled) { border-color: var(--rose); color: var(--rose); }
+
+/* ── Remarcação Panel ── */
+.remarcacao-panel { margin-top: 40px; }
+.remarcacao-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; gap: 12px; flex-wrap: wrap;
+}
+.section-title {
+  font-size: 16px; font-weight: 700; color: var(--text);
+  display: flex; align-items: center; gap: 10px;
+}
+.badge-count {
+  font-size: 12px; font-weight: 600; color: var(--rose);
+  background: var(--rose-dim); border: 1px solid var(--rose);
+  border-radius: 20px; padding: 2px 10px;
+}
+.btn-export {
+  background: transparent; border: 1px solid var(--text);
+  color: var(--text); border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.btn-export:hover { background: var(--text); color: #fff; }
+
+.remarcacao-empty {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 24px;
+  font-size: 13px; color: var(--text2);
+}
+.remarcacao-empty span { display: block; margin-top: 4px; font-size: 12px; opacity: 0.7; }
+
+.remarcacao-table .price-col { text-align: right; }
+.remarcacao-table .price-relevant { color: var(--text); font-weight: 600; }
+.remarcacao-table .price-na { color: var(--text2); opacity: 0.35; }
+.liq-cell { text-align: center !important; }
+.liq-badge {
+  display: inline-block;
+  background: var(--red); color: #fff;
+  font-size: 10px; font-weight: 800;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}

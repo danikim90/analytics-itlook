@@ -22,13 +22,6 @@ const FILES_CONFIG = [
     accept: '.xls,.xlsx',
     icon: '🗃️',
   },
-  {
-    key: 'motivos',
-    label: 'Devoluções e Trocas',
-    hint: 'ProdutosMotivos.csv / .xlsx',
-    accept: '.csv,.xlsx,.xls',
-    icon: '🔄',
-  },
 ];
 
 export default function FileUpload({ files, onChange, onProcess, loading }) {

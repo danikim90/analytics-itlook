@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
 
 const CURVA_COLORS = {
-  A: '#16a34a',
+  'A+': '#15803d',
+  'A-': '#16a34a',
   'B+': '#2563eb',
   'B-': '#7c3aed',
   'C+': '#d97706',
   'C-': '#dc2626',
+  'Aguardando': '#9898a8',
 };
 
 const URGENCIA_COLORS = {
@@ -43,7 +45,7 @@ const COLUMNS = [
   { key: 'remarcacao', label: 'Remarcação', sortable: false },
 ];
 
-const CURVA_OPTIONS = ['Todas', 'A', 'B+', 'B-', 'C+', 'C-'];
+const CURVA_OPTIONS = ['Todas', 'A+', 'A-', 'B+', 'B-', 'C+', 'C-', 'Aguardando'];
 const URGENCIA_OPTIONS = ['Todos', 'Remarcar agora', 'Sem recomendação'];
 
 export default function ABCTable({ data }) {
@@ -208,13 +210,6 @@ export default function ABCTable({ data }) {
                               </div>
                             ))}
                         </div>
-                        {(row.trocas > 0 || row.devolucoes > 0) && (
-                          <div className="devolucao-info">
-                            <span>Reversas: <strong>{row.reversas}</strong></span>
-                            <span>Trocas: <strong>{row.trocas}</strong></span>
-                            <span>Devoluções: <strong>{row.devolucoes}</strong></span>
-                          </div>
-                        )}
                       </div>
                     </td>
                   </tr>

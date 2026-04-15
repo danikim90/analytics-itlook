@@ -2,7 +2,8 @@ import { useState } from 'react';
 import FileUpload from './components/FileUpload';
 import SummaryCards from './components/SummaryCards';
 import ABCTable from './components/ABCTable';
-import { parseVendas, parseEstoque, parseSaldos, parseMotivos } from './utils/parseFiles';
+import RemarcacaoPanel from './components/RemarcacaoPanel';
+import { parseVendas, parseEstoque, parseSaldos } from './utils/parseFiles';
 import { buildAbcData } from './utils/abcLogic';
 import './App.css';
 
@@ -22,13 +23,12 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const [vendas, estoque, saldos, motivos] = await Promise.all([
+      const [vendas, estoque, saldos] = await Promise.all([
         parseVendas(files.vendas),
         parseEstoque(files.estoque),
         parseSaldos(files.saldos),
-        parseMotivos(files.motivos),
       ]);
-      const result = buildAbcData(vendas, estoque, saldos, motivos);
+      const result = buildAbcData(vendas, estoque, saldos);
       setData(result);
     } catch (err) {
       console.error(err);
@@ -65,6 +65,7 @@ export default function App() {
         {data && (
           <>
             <SummaryCards data={data} />
+            <RemarcacaoPanel data={data} />
             <ABCTable data={data} />
           </>
         )}

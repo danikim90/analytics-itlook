@@ -27,9 +27,11 @@ function descontosRelevantesPct(curva, dPlus) {
 
 /** Texto descritivo do status de remarcação para uso no CSV e na UI. */
 function statusRemarcacao(item) {
-  const { curva, dPlus, remarcacao } = item;
-  if (curva === 'Aguardando' || dPlus == null || dPlus < 30)
-    return 'Aguardando dados (D+ < 30)';
+  const { curva, dPlus, remarcacao, provisorio } = item;
+  if (curva === 'Aguardando' || dPlus == null || dPlus < 7)
+    return 'Aguardando dados (D+ < 7)';
+  if (provisorio)
+    return `Curva provisória (confirma em ${15 - dPlus} dias)`;
   if (curva === 'A+' || curva === 'A-')
     return 'Curva A — não remarcar';
   if (remarcacao)

@@ -9,16 +9,16 @@ import { buildAbcData } from './utils/abcLogic';
 import './App.css';
 
 export default function App() {
-  const [module, setModule] = useState(1);
+  const [activeModule, setActiveModule] = useState('modulo1');
 
   // Módulo 1 state
-  const [files, setFiles] = useState({});
-  const [data, setData] = useState(null);
+  const [files, setFiles]   = useState({});
+  const [data, setData]     = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError]   = useState(null);
 
   const handleFileChange = (key, file) => {
-    setFiles((f) => ({ ...f, [key]: file }));
+    setFiles(f => ({ ...f, [key]: file }));
     setData(null);
     setError(null);
   };
@@ -52,16 +52,17 @@ export default function App() {
             <span className="logo-sep">|</span>
             <span className="logo-analytics">Analytics</span>
           </div>
-          <nav className="header-nav">
+
+          <nav className="module-nav">
             <button
-              className={`nav-tab ${module === 1 ? 'active' : ''}`}
-              onClick={() => setModule(1)}
+              className={`module-tab ${activeModule === 'modulo1' ? 'active' : ''}`}
+              onClick={() => setActiveModule('modulo1')}
             >
-              Módulo 1 — Curva ABC
+              Módulo 1 — ABC &amp; Remarcação
             </button>
             <button
-              className={`nav-tab ${module === 2 ? 'active' : ''}`}
-              onClick={() => setModule(2)}
+              className={`module-tab ${activeModule === 'modulo2' ? 'active' : ''}`}
+              onClick={() => setActiveModule('modulo2')}
             >
               Módulo 2 — Trocas &amp; Devoluções
             </button>
@@ -70,7 +71,7 @@ export default function App() {
       </header>
 
       <main className="main">
-        {module === 1 && (
+        {activeModule === 'modulo1' && (
           <>
             <FileUpload
               files={files}
@@ -88,7 +89,10 @@ export default function App() {
             )}
           </>
         )}
-        {module === 2 && <Modulo2 />}
+
+        {activeModule === 'modulo2' && (
+          <Modulo2 abcData={data} />
+        )}
       </main>
 
       <footer className="footer">

@@ -17,13 +17,16 @@ function daysDiff(date) {
  * C+ = 66–85%    C- = bottom 15%
  */
 function atribuirCurva(items) {
-  // Produtos com D+ < 30 não entram no ranking — ainda sem histórico suficiente
-  items.filter((i) => i.dPlus == null || i.dPlus < 30).forEach((item) => {
+  // D+ < 7 → sem dados suficientes para qualquer classificação
+  items.filter((i) => i.dPlus == null || i.dPlus < 7).forEach((item) => {
     item.curva = 'Aguardando';
+    item.provisorio = false;
   });
 
-  // Ranking por velocidade (saídas ÷ D+) apenas para produtos com D+ ≥ 30
-  const elegiveis = items.filter((i) => i.dPlus != null && i.dPlus >= 30);
+  // D+ ≥ 7 → entra no ranking por velocidade
+  // D+ 7–14 → curva provisória (sinal ainda fraco)
+  // D+ ≥ 15 → curva confirmada
+  const elegiveis = items.filter((i) => i.dPlus != null && i.dPlus >= 7);
   const sorted = [...elegiveis].sort((a, b) => b.velocidade - a.velocidade);
   const n = sorted.length;
 
@@ -35,6 +38,7 @@ function atribuirCurva(items) {
     else if (pct <= 0.65) item.curva = 'B-';
     else if (pct <= 0.85) item.curva = 'C+';
     else                  item.curva = 'C-';
+    item.provisorio = item.dPlus < 15;
   });
 }
 
@@ -47,8 +51,8 @@ function atribuirCurva(items) {
  *
  * Retorna null quando não há ação recomendada.
  */
-function recomendacaoRemarcacao(dPlus, curva) {
-  if (!dPlus || curva === 'A+' || curva === 'A-' || curva === 'Aguardando') return null;
+function recomendacaoRemarcacao(dPlus, curva, provisorio) {
+  if (!dPlus || curva === 'A+' || curva === 'A-' || curva === 'Aguardando' || provisorio) return null;
 
   const isB = curva === 'B+' || curva === 'B-';
   const isC = curva === 'C+' || curva === 'C-';
@@ -143,7 +147,7 @@ export function buildAbcData(vendas, estoque, saldos) {
 
   // 7. Recomendação de remarcação (curva × D+)
   items.forEach((item) => {
-    item.remarcacao = recomendacaoRemarcacao(item.dPlus, item.curva);
+    item.remarcacao = recomendacaoRemarcacao(item.dPlus, item.curva, item.provisorio);
   });
 
   return items;

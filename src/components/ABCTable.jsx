@@ -147,8 +147,9 @@ export default function ABCTable({ data }) {
                     <span
                       className="curva-badge"
                       style={{ background: CURVA_COLORS[row.curva] }}
+                      title={row.provisorio ? 'Curva provisória — D+ < 15 dias' : undefined}
                     >
-                      {row.curva}
+                      {row.curva}{row.provisorio ? ' ⚠' : ''}
                     </span>
                   </td>
                   <td>

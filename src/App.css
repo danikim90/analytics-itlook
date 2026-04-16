@@ -51,21 +51,6 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; }
 /* ── Footer ── */
 .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--text2); border-top: 1px solid var(--border); }
 
-/* ── Header Nav ── */
-.header-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.nav-tab {
-  background: none; border: 1px solid transparent;
-  color: var(--text2); border-radius: 20px;
-  padding: 5px 14px; font-size: 12px; font-weight: 500;
-  cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s;
-  white-space: nowrap;
-}
-.nav-tab:hover { color: var(--text); border-color: var(--border); }
-.nav-tab.active {
-  color: var(--rose); border-color: var(--rose);
-  background: var(--rose-dim); font-weight: 700;
-}
-
 /* ── Upload Panel ── */
 .upload-panel { margin-bottom: 28px; }
 .upload-grid {
@@ -313,165 +298,58 @@ body { background: var(--bg); color: var(--text); min-height: 100vh; }
   text-transform: uppercase; letter-spacing: 0.5px;
 }
 
-/* ══════════════════════════════════════════════════════════════
-   MÓDULO 2 — Trocas & Devoluções
-   ══════════════════════════════════════════════════════════════ */
-
-/* ── Upload optional label ── */
-.upload-optional { font-size: 11px; color: var(--text2); font-weight: 400; }
-
-/* ── Tab navigation ── */
-.m2-content { padding-top: 4px; }
-.m2-tabs {
-  display: flex; gap: 0;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 36px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* ── Navegação de Módulos ── */
+.module-nav {
+  display: flex; align-items: center; gap: 4px; margin-left: auto;
 }
-.m2-tabs::-webkit-scrollbar { display: none; }
+.module-tab {
+  background: none; border: 1px solid transparent;
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 12px; font-weight: 500; color: var(--text2);
+  cursor: pointer; transition: all 0.18s; white-space: nowrap;
+}
+.module-tab:hover { color: var(--text); border-color: var(--border); }
+.module-tab.active {
+  background: var(--text); color: #fff;
+  border-color: var(--text);
+}
+
+/* ── Módulo 2 — Tab bar ── */
+.m2-tabbar {
+  display: flex; align-items: center; gap: 2px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0; margin-bottom: 0;
+  overflow-x: auto;
+  /* sem scrollbar visível */
+  scrollbar-width: none;
+}
+.m2-tabbar::-webkit-scrollbar { display: none; }
+
 .m2-tab {
-  background: none; border: none;
-  border-bottom: 3px solid transparent;
-  color: var(--text2);
-  font-size: 13px; font-weight: 500;
-  padding: 12px 22px;
-  cursor: pointer;
-  margin-bottom: -2px;
-  transition: color 0.15s, border-color 0.15s;
-  white-space: nowrap;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  padding: 10px 16px; font-size: 13px; font-weight: 500;
+  color: var(--text2); cursor: pointer; white-space: nowrap;
+  margin-bottom: -1px; transition: color 0.15s, border-color 0.15s;
 }
 .m2-tab:hover { color: var(--text); }
-.m2-tab.active {
-  color: var(--text);
-  font-weight: 700;
-  border-bottom-color: var(--rose);
-}
+.m2-tab.active { color: var(--rose); border-bottom-color: var(--rose); font-weight: 700; }
 
-/* ── Page title + subtitle ── */
-.m2-page-title {
-  font-size: 22px; font-weight: 800;
-  color: var(--text); letter-spacing: -0.5px;
-  margin-bottom: 8px;
-}
-.m2-page-subtitle {
-  font-size: 13px; color: var(--text2);
-  margin-bottom: 32px; line-height: 1.6;
-  max-width: 640px;
-}
-
-/* ── Motivo badge (category table) ── */
-.motivo-badge {
-  display: inline-block;
-  background: var(--bg3); border: 1px solid var(--border);
-  color: var(--text); border-radius: 4px;
-  padding: 2px 8px; font-size: 11px; font-weight: 600;
-}
-
-/* ── Inline % bar (category table) ── */
-.m2-pct-bar-wrap {
-  display: flex; align-items: center; gap: 8px; min-width: 140px;
-}
-.m2-pct-bar {
-  display: inline-block; height: 6px; border-radius: 3px;
-  background: var(--rose); opacity: 0.5;
-  min-width: 2px; max-width: 80px;
-}
-.m2-pct-label { font-size: 12px; color: var(--text2); flex-shrink: 0; }
-
-/* ── Bar chart (Motivos) ── */
-.motivos-chart { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
-.motivo-row { display: flex; align-items: center; gap: 16px; }
-.motivo-label {
-  width: 230px; flex-shrink: 0;
-  font-size: 13px; font-weight: 500; color: var(--text);
-}
-.motivo-bar-wrap {
-  flex: 1; height: 22px;
-  background: var(--bg3); border-radius: 6px;
-  overflow: hidden;
-}
-.motivo-bar { height: 100%; border-radius: 6px; transition: width 0.5s ease; min-width: 4px; }
-.motivo-stats { display: flex; gap: 10px; width: 100px; flex-shrink: 0; justify-content: flex-end; }
-.motivo-total { font-size: 14px; font-weight: 700; color: var(--text); }
-.motivo-pct   { font-size: 12px; color: var(--text2); min-width: 40px; text-align: right; }
-
-/* ── Sizing grid ── */
-.sizing-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-.sizing-card {
-  background: var(--bg2); border: 2px solid var(--border);
-  border-radius: var(--radius); padding: 18px 20px;
-  min-width: 120px; text-align: center;
-}
-.sizing-card.sizing-grande  { border-color: var(--red);    background: rgba(220,38,38,0.04); }
-.sizing-card.sizing-pequeno { border-color: var(--purple);  background: rgba(124,58,237,0.04); }
-.sizing-card.sizing-neutro  { border-color: var(--border); }
-.sizing-tam  { font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 12px; }
-.sizing-row  { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--text2); margin-bottom: 5px; }
-.sizing-row strong { color: var(--text); font-weight: 700; }
-.sizing-dir  { margin-top: 12px; font-size: 11px; font-weight: 700; padding: 4px 0; border-top: 1px solid var(--border); }
-.sizing-card.sizing-grande  .sizing-dir { color: var(--red); }
-.sizing-card.sizing-pequeno .sizing-dir { color: var(--purple); }
-.sizing-card.sizing-neutro  .sizing-dir { color: var(--text2); }
-
-/* ── Taxa badges ── */
-.taxa-badge {
-  display: inline-block;
-  padding: 2px 8px; border-radius: 4px;
-  font-size: 12px; font-weight: 700;
-  color: var(--text); background: var(--bg3);
-  border: 1px solid var(--border);
-}
-.taxa-badge.taxa-alta { color: #fff; background: var(--red); border-color: var(--red); }
-.taxa-pequena { font-size: 11px; color: var(--text2); }
-
-/* ── ABC × Devolução quadrant grid ── */
-.abc-dev-grid {
+/* ── Módulo 2 — Layout ── */
+.m2-two-col {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
 }
-.abc-dev-card { border: 1px solid; border-radius: var(--radius); padding: 22px 24px; }
-.abc-dev-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
-.abc-dev-desc  { font-size: 12px; color: var(--text2); margin-bottom: 8px; line-height: 1.5; }
-.abc-dev-count { font-size: 11px; font-weight: 700; margin-bottom: 16px; }
-.abc-dev-list  { display: flex; flex-direction: column; gap: 0; }
-.abc-dev-item  {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
-  font-size: 12px; padding: 7px 0;
-  border-bottom: 1px solid rgba(229,227,220,0.6);
-}
-.abc-dev-item:last-child { border-bottom: none; }
-.abc-dev-name  { color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.abc-dev-taxa  { font-weight: 700; flex-shrink: 0; font-size: 12px; }
-.abc-dev-more-btn {
+
+/* ── Botão +N mais ── */
+.btn-mais {
   display: block; width: 100%;
-  background: none; border: none;
-  font-size: 11px; color: var(--text2);
-  cursor: pointer; text-align: left;
-  padding: 8px 0 0; font-style: italic;
-  transition: color 0.15s;
+  background: none; border: 1px dashed var(--border);
+  border-radius: 6px; padding: 6px 12px;
+  font-size: 12px; color: var(--text2);
+  cursor: pointer; margin-top: 8px;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
 }
-.abc-dev-more-btn:hover { color: var(--rose); }
-
-/* B-curve divider */
-.m2-b-divider {
-  font-size: 11px; font-weight: 600; color: var(--text2);
-  text-transform: uppercase; letter-spacing: 0.5px;
-  margin-top: 32px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ── Scoped table overrides for Module 2 ── */
-.m2-content .abc-table thead th {
-  background: none;
-  border-bottom: 2px solid var(--border);
-  padding: 10px 16px;
-}
-.m2-content .abc-table tbody td {
-  padding: 13px 16px;
-  border-bottom: 1px solid rgba(229,227,220,0.5);
-}
-.m2-content .abc-table tbody tr.row-main:hover td { background: var(--bg3); }
-.m2-content .abc-table tbody tr.row-main.expanded td { background: var(--bg3); }
+.btn-mais:hover { border-color: var(--rose); color: var(--rose); }

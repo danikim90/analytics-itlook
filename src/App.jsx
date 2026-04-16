@@ -3,11 +3,15 @@ import FileUpload from './components/FileUpload';
 import SummaryCards from './components/SummaryCards';
 import ABCTable from './components/ABCTable';
 import RemarcacaoPanel from './components/RemarcacaoPanel';
+import Modulo2 from './components/Modulo2';
 import { parseVendas, parseEstoque, parseSaldos } from './utils/parseFiles';
 import { buildAbcData } from './utils/abcLogic';
 import './App.css';
 
 export default function App() {
+  const [module, setModule] = useState(1);
+
+  // Módulo 1 state
   const [files, setFiles] = useState({});
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,27 +52,43 @@ export default function App() {
             <span className="logo-sep">|</span>
             <span className="logo-analytics">Analytics</span>
           </div>
-          <div className="header-tag">Módulo 1 — Curva ABC &amp; Remarcação</div>
+          <nav className="header-nav">
+            <button
+              className={`nav-tab ${module === 1 ? 'active' : ''}`}
+              onClick={() => setModule(1)}
+            >
+              Módulo 1 — Curva ABC
+            </button>
+            <button
+              className={`nav-tab ${module === 2 ? 'active' : ''}`}
+              onClick={() => setModule(2)}
+            >
+              Módulo 2 — Trocas &amp; Devoluções
+            </button>
+          </nav>
         </div>
       </header>
 
       <main className="main">
-        <FileUpload
-          files={files}
-          onChange={handleFileChange}
-          onProcess={handleProcess}
-          loading={loading}
-        />
-
-        {error && <div className="error-banner">{error}</div>}
-
-        {data && (
+        {module === 1 && (
           <>
-            <SummaryCards data={data} />
-            <RemarcacaoPanel data={data} />
-            <ABCTable data={data} />
+            <FileUpload
+              files={files}
+              onChange={handleFileChange}
+              onProcess={handleProcess}
+              loading={loading}
+            />
+            {error && <div className="error-banner">{error}</div>}
+            {data && (
+              <>
+                <SummaryCards data={data} />
+                <RemarcacaoPanel data={data} />
+                <ABCTable data={data} />
+              </>
+            )}
           </>
         )}
+        {module === 2 && <Modulo2 />}
       </main>
 
       <footer className="footer">
